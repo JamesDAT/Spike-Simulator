@@ -39,20 +39,14 @@ target_include_directories(Spike_Simulator PRIVATE ${Python3_INCLUDE_DIRS})
 target_link_libraries(Spike_Simulator PRIVATE ${Python3_LIBRARIES})
 
 
-# Copy python interfaces to output dir
-
+# Copy python interfaces to configuration-specific output directory
 set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/interfaces)
-set(DEST_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
-if(NOT DEFINED CMAKE_RUNTIME_OUTPUT_DIRECTORY)
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
-endif()
-
-# Copy all .pyi files from the source to the destination
+# Use generator expressions to ensure the correct configuration-specific directory is targeted
 add_custom_command(
-    TARGET Spike_Simulator 
+    TARGET Spike_Simulator
     POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
-    ${SOURCE_DIR} ${DEST_DIR}
-    COMMENT "Copying .pyi files from interfaces to the binary output directory."
+    ${SOURCE_DIR} $<TARGET_FILE_DIR:Spike_Simulator>
+    COMMENT "Copying .pyi files from interfaces to the configuration-specific binary output directory."
 )
