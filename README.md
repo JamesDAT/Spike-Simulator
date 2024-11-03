@@ -8,7 +8,7 @@ MSVC is the target for windows compilation, and Clang for everything else.
 ### Windows
 To build on windows simply open cmd to the project folder and run
 ```
-./build_windows.bat
+build_windows.bat
 ```
 Or just run the bat file directly. This will generate a visual studio solution in the build folder,
 which can further be used for compiling etc.
