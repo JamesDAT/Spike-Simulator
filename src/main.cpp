@@ -1,7 +1,6 @@
-#include <iostream>
+import Test_Module;
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    std::cin.ignore();
+    MyFunc();
     return 0;
 }
