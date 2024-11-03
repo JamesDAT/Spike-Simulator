@@ -6,6 +6,9 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# Package
+find_package(Python3 COMPONENTS Development REQUIRED)
+
 # Detect the compiler and set the build directory
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     set(PLATFORM "windows")
@@ -22,7 +25,7 @@ set(BUILD_DIR "${CMAKE_SOURCE_DIR}/build/${PLATFORM}")
 file(MAKE_DIRECTORY ${BUILD_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BUILD_DIR})
 
-# Collect all source files (.cpp and .cppm) from the src directory
+# Collect all source files (.cpp and .cppm) from the src directory, note not including .h files currently until there is a good reason to
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/src/*.cpp ${CMAKE_SOURCE_DIR}/src/*.cppm)
 
 # Create the executable
@@ -30,3 +33,26 @@ add_executable(Spike_Simulator ${SOURCES})
 
 # Include directories
 target_include_directories(Spike_Simulator PRIVATE ${CMAKE_SOURCE_DIR}/include)
+target_include_directories(Spike_Simulator PRIVATE ${Python3_INCLUDE_DIRS})
+
+# Link Libraries
+target_link_libraries(Spike_Simulator PRIVATE ${Python3_LIBRARIES})
+
+
+# Copy python interfaces to output dir
+
+set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/interfaces)
+set(DEST_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+
+if(NOT DEFINED CMAKE_RUNTIME_OUTPUT_DIRECTORY)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+endif()
+
+# Copy all .pyi files from the source to the destination
+add_custom_command(
+    TARGET Spike_Simulator 
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${SOURCE_DIR} ${DEST_DIR}
+    COMMENT "Copying .pyi files from interfaces to the binary output directory."
+)
