@@ -25,7 +25,7 @@ set(BUILD_DIR "${CMAKE_SOURCE_DIR}/build/${PLATFORM}")
 file(MAKE_DIRECTORY ${BUILD_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BUILD_DIR})
 
-# Collect all source files (.cpp and .cppm) from the src directory, note not including .h files currently until there is a good reason to
+# Collect all source files (.cpp and .cppm) from the src directory
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/src/*.cpp ${CMAKE_SOURCE_DIR}/src/*.cppm)
 
 # Create the executable
@@ -36,8 +36,12 @@ target_include_directories(Spike_Simulator PRIVATE ${CMAKE_SOURCE_DIR}/include)
 target_include_directories(Spike_Simulator PRIVATE ${Python3_INCLUDE_DIRS})
 
 # Link Libraries
-target_link_libraries(Spike_Simulator PRIVATE ${Python3_LIBRARIES})
+target_link_libraries(Spike_Simulator PRIVATE ${Python3_LIBRARIES} glfw)
+target_link_libraries(Spike_Simulator PRIVATE glad)
 
+# Add GLFW and GLAD subdirectories
+add_subdirectory(vendor/glfw-3.4)
+add_subdirectory(vendor/Glad)
 
 # Copy python interfaces to configuration-specific output directory
 set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/interfaces)

@@ -34,7 +34,7 @@ extern "C" {
     }
 }
 
-int main() {
+int d_main() {
     // Initialize the Python Interpreter
     Py_Initialize();
 
