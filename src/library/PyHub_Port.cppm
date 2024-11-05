@@ -9,7 +9,7 @@ namespace SpkSim {
 
     static struct PyModuleDef ModuleDef = {
         PyModuleDef_HEAD_INIT,
-        "hub",
+        "port",
         "This module contains constants that enables easy access to the ports on the SPIKE Prime hub. Use the constants in all functions that takes a port parameter.",
         -1,
         Methods

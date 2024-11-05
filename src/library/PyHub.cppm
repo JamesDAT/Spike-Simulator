@@ -7,6 +7,7 @@ export module PyLibrary:PyHub;
 import :PyHub.Port;
 import :PyHub.Sound;
 import :PyHub.Button;
+import :PyHub.Light;
 
 import std;
 
@@ -58,6 +59,7 @@ namespace SpkSim {
             PyModule_AddObject(pymod, "port", Port_Init());
             PyModule_AddObject(pymod, "sound", Sound_Init());
             PyModule_AddObject(pymod, "button", Button_Init());
+            PyModule_AddObject(pymod, "light", Light_Init());
 
             return pymod;
         }

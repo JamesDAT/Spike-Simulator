@@ -43,3 +43,11 @@ class button:
 
     LEFT: int   # Value: 1
     RIGHT: int  # Value: 2
+
+class light:
+    def color(light: int, color: int) -> None:
+        """Change the color of a light on the hub."""
+
+    POWER: int      # Value: 0
+    CONNECT: int    # Value: 1
+
