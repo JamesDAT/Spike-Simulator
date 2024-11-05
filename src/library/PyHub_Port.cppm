@@ -3,21 +3,21 @@ module;
 export module PyLibrary:PyHub.Port;
 
 namespace SpkSim {
-    static PyMethodDef PortMethods[] = {
+    static PyMethodDef Methods[] = {
         {nullptr, nullptr, 0, nullptr} // signal end of array
     };
 
-    static struct PyModuleDef PortModuleDef = {
+    static struct PyModuleDef ModuleDef = {
         PyModuleDef_HEAD_INIT,
         "hub",
         "This module contains constants that enables easy access to the ports on the SPIKE Prime hub. Use the constants in all functions that takes a port parameter.",
         -1,
-        PortMethods
+        Methods
     };
 
     // create the Port module and assign the constants
     export PyMODINIT_FUNC Port_Init() {
-        PyObject* pymod = PyModule_Create(&PortModuleDef);
+        PyObject* pymod = PyModule_Create(&ModuleDef);
         if (pymod == nullptr) return nullptr;
 
         PyModule_AddIntConstant(pymod, "A", 0);

@@ -4,7 +4,9 @@
 module;
 #include <Python.h>;
 export module PyLibrary:PyHub;
-export import :PyHub.Port;
+import :PyHub.Port;
+import :PyHub.Sound;
+import :PyHub.Button;
 
 import std;
 
@@ -52,8 +54,10 @@ namespace SpkSim {
             PyObject* pymod = PyModule_Create(&HubModuleDef);
             if (pymod == nullptr) return nullptr;
 
-            // add the Port module to the hub module 'pymod'
+            // add the sub modules to the hub module 'pymod'
             PyModule_AddObject(pymod, "port", Port_Init());
+            PyModule_AddObject(pymod, "sound", Sound_Init());
+            PyModule_AddObject(pymod, "button", Button_Init());
 
             return pymod;
         }
