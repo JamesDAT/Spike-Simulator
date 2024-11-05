@@ -2,6 +2,7 @@ module;
 export module Application;
 import Window;
 import Renderer;
+import PyLibrary;
 import std;
 
 namespace SpkSim {
@@ -17,5 +18,6 @@ namespace SpkSim {
 
 		Window m_window{};
 		Renderer m_renderer{};
+		PyLibrary m_pylib{};
 	};
 }

@@ -1,5 +1,6 @@
-module Renderer;
+module;
 #include <glad/glad.h>
+module Renderer;
 import <GLFW/glfw3.h>;
 import Window;
 import std;

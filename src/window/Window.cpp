@@ -1,3 +1,4 @@
+module;
 module Window;
 import <GLFW/glfw3.h>;
 import std;

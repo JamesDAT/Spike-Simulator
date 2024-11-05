@@ -8,6 +8,7 @@ namespace SpkSim {
 	void Application::Run() {
 		m_window.Initialize();
 		m_renderer.Initialize();
+		m_pylib.Run();
 
 		MainLoop();
 	}
