@@ -2,7 +2,7 @@
 /// This testing code should outline the template for creating python modules and how they are implemented further
 /// </summary>
 module;
-#include <Python.h>;
+#include <Python.h>
 export module PyLibrary:PyHub;
 import :PyHub.Port;
 import :PyHub.Sound;
