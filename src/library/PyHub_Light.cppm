@@ -7,8 +7,7 @@ namespace SpkSim {
     static PyObject* color(PyObject* self, PyObject* args) {
         //light: int, color: int
 
-        // check if button is pressed
-        Py_RETURN_FALSE;
+        Py_RETURN_NONE;
     }
 
     static PyMethodDef Methods[] = {
