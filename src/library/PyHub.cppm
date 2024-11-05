@@ -4,25 +4,40 @@
 module;
 #include <Python.h>;
 export module PyLibrary:PyHub;
+export import :PyHub.Port;
 
 import std;
 
 namespace SpkSim {
 
-    static PyObject* print_out(PyObject* self, PyObject* args) {
-        const char* msg;
-        if (!PyArg_ParseTuple(args, "s", &msg)) {
-            return nullptr; // Error in argument parsing
-        }
-        std::cout << "Called from Python: " << msg << std::endl;
-        Py_RETURN_NONE;
+    static PyObject* device_uuid(PyObject* self, PyObject* args) {
+        return PyUnicode_FromString("550e8400-e29b-41d4-a716-446655440000"); // filler UUID
     }
 
+    static PyObject* hardware_id(PyObject* self, PyObject* args) {
+        return PyUnicode_FromString("550e8400-e29b-41d4-a716-446655440000"); // filler id
+    }
+
+    static PyObject* power_off(PyObject* self, PyObject* args) {
+        // should stop the simulation
+        return PyLong_FromLong(0); // unknown what the real thing returns
+    }
+
+    static PyObject* temperature(PyObject* self, PyObject* args) {
+        // 18C
+        return PyLong_FromLong(180); // returns 180 Decidegrees celcius
+    }
+
+    // Register all the methods for the module
     static PyMethodDef HubMethods[] = {
-        {"print_out", print_out, METH_VARARGS, "Meta test function for cpp printing"},
-        {nullptr, nullptr, 0, nullptr}
+        {"device_uuid", device_uuid, METH_NOARGS, "Retrieve the device id."},
+        {"hardware_id", hardware_id, METH_NOARGS, "Retrieve the hardware id."},
+        {"power_off", power_off, METH_NOARGS, "Turns off the hub."},
+        {"temperature", temperature, METH_NOARGS, "Retrieve the hub temperature. Measured in decidegrees celsius (d°C) which is 1 / 10 of a degree celsius (°C)"},
+        {nullptr, nullptr, 0, nullptr} // signal end of array
     };
 
+    // Defines the module for importing into python
     static struct PyModuleDef HubModuleDef = {
         PyModuleDef_HEAD_INIT,
         "hub",
@@ -31,9 +46,16 @@ namespace SpkSim {
         HubMethods
     };
 
+    // Creates the modules for python
     extern "C" {
         PyMODINIT_FUNC PyInit_Hub(void) {
-            return PyModule_Create(&HubModuleDef);
+            PyObject* pymod = PyModule_Create(&HubModuleDef);
+            if (pymod == nullptr) return nullptr;
+
+            // add the Port module to the hub module 'pymod'
+            PyModule_AddObject(pymod, "port", Port_Init());
+
+            return pymod;
         }
     }
 
