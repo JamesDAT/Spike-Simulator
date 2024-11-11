@@ -5,6 +5,7 @@ module;
 #include <Python.h>
 export module PyLibrary;
 import :PyHub;
+import :PyMeta;
 import std;
 
 namespace SpkSim {
@@ -23,6 +24,8 @@ namespace SpkSim {
 			Py_Initialize();
 
 			m_pyHub.CreateHubModule();
+			m_pyMeta.CreateMetaModule();
+			
 
 			std::string scriptPath = "Test.py";
 			FILE* pfile = fopen(scriptPath.c_str(), "r");
@@ -37,5 +40,6 @@ namespace SpkSim {
 
 	private:
 		PyHub m_pyHub{};
+		PyMeta m_pyMeta{};
 	};
 }
