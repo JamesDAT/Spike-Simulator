@@ -35,13 +35,19 @@ add_executable(Spike_Simulator ${SOURCES})
 target_include_directories(Spike_Simulator PRIVATE ${CMAKE_SOURCE_DIR}/include)
 target_include_directories(Spike_Simulator PRIVATE ${Python3_INCLUDE_DIRS})
 
+# Add vendor subdirectories
+add_subdirectory(vendor/glfw-3.4)
+add_subdirectory(vendor/Glad)
+
 # Link Libraries
 target_link_libraries(Spike_Simulator PRIVATE ${Python3_LIBRARIES} glfw)
 target_link_libraries(Spike_Simulator PRIVATE glad)
 
-# Add GLFW and GLAD subdirectories
-add_subdirectory(vendor/glfw-3.4)
-add_subdirectory(vendor/Glad)
+# Add glm
+add_library(glm)
+target_sources(glm PRIVATE ${CMAKE_SOURCE_DIR}/vendor/glm-1.0.1/glm/glm.cppm)
+target_include_directories(glm PUBLIC ${CMAKE_SOURCE_DIR}/vendor/glm-1.0.1)
+target_link_libraries(Spike_Simulator PRIVATE glm)
 
 # Copy python interfaces to configuration-specific output directory
 set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/interfaces)
