@@ -21,7 +21,3 @@ Or just run the shell script directly. Note the file may require `chmod +x build
 
 
 ## Notes
-The build system has been confirmed with clang 17 on linux, but as of current has not been tested with modules.
-The project does follow cross platform standard, so no `.ixx`, but `import std;` is used so clang 18 is required.
-Building on linux for modules may also require modification to the CMake file to use `Ninja` instead of `Make` to
-allow for modules, as well as increasing the CMake version from 3.25
