@@ -17,7 +17,7 @@ namespace SpkSim {
 	}
 
 	static PyMethodDef Methods[] = {
-		{"run", rgbi, METH_VARARGS, "Run motor in a given port"},
+		{"rgbi", rgbi, METH_VARARGS, "Run motor in a given port"},
 		{nullptr, nullptr, 0, nullptr} // signal end of array
 	};
 
