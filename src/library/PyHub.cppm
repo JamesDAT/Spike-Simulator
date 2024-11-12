@@ -9,6 +9,7 @@ import :PyHub.Sound;
 import :PyHub.Button;
 import :PyHub.Light;
 import :PyHub.Light_Matrix;
+import :PyHub.Motion_Sensor;
 
 import std;
 
@@ -62,6 +63,7 @@ namespace SpkSim {
             PyModule_AddObject(pymod, "button", Button_Init());
             PyModule_AddObject(pymod, "light", Light_Init());
             PyModule_AddObject(pymod, "light_matrix", LightMatrix_Init());
+            PyModule_AddObject(pymod, "motion_sensor", MotionSensor_Init());
 
             return pymod;
         }

@@ -51,6 +51,13 @@ class light:
     POWER: int      # Value: 0
     CONNECT: int    # Value: 1
 
+class motion_sensor:
+    def acceleration(raw_unfiltered: bool = False) -> None:
+        """Returns a tuple containing x, y & z acceleration values as integers. The values are in mg (0.001 g)"""
+
+    def tilt_angles() -> tuple[int, int, int]:
+        """Returns a tuple containing yaw pitch and roll values as integers. Values are decidegrees"""
+
 class light_matrix:
     def clear() -> None:
         """Switches off all of the pixels on the Light Matrix."""

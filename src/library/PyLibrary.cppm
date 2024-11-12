@@ -6,6 +6,8 @@ module;
 export module PyLibrary;
 import :PyHub;
 import :PyMeta;
+import :PyMotor;
+import :PyColor_Sensor;
 import std;
 
 namespace SpkSim {
@@ -25,6 +27,8 @@ namespace SpkSim {
 
 			m_pyHub.CreateHubModule();
 			m_pyMeta.CreateMetaModule();
+			m_pyMotor.CreateMotorModule();
+			m_pyColorSensor.CreateColorSensorModule();
 			
 
 			std::string scriptPath = "Test.py";
@@ -41,5 +45,7 @@ namespace SpkSim {
 	private:
 		PyHub m_pyHub{};
 		PyMeta m_pyMeta{};
+		PyMotor m_pyMotor{};
+		PyColor_Sensor m_pyColorSensor{};
 	};
 }
